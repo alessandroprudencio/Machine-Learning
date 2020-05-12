@@ -2,7 +2,7 @@
 
 Programando redes neurais com Tensorflow JS e ML5
 
-[![Detecção de objetos em tempo real](https://youtu.be/SRVkBJfS1Zc)]
+![Detecção de objetos em tempo real](./ml.gif)
 
 ## Vamos começar!
 
