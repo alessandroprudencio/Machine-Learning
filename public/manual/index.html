@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.4/dist/tf.min.js"></script>
+
+    <div>
+        <video width="800" height="550" style=" position: fixed;" id="video" autoplay muted></video>
+        <span style="margin-top: 550px;position: fixed;font-size: 22px;" id="box"></span>
+        <button onclick="sortImage('bottle')" style="margin-top: 580px;position: fixed;" id="garrafa"> foto
+            garrafas</button>
+        <button onclick="sortImage('smartphone')" style="margin-top: 580px;margin-left:200px;position: fixed;">
+            foto celular</button>
+        <button onclick="sortImage('parfum')" style="margin-top: 580px;margin-left:100px;position: fixed;">
+            foto perfume</button>
+        <button onclick="trainer()" style="margin-top: 580px;margin-left:400px;position: fixed;">Treinar</button>
+        <button onclick="saveModel()" style="margin-top: 620px;margin-left:400px;position: fixed;">Salvar
+            Modelo</button>
+    </div>
+    <script>
+        let classifier;
+        let mobilenet;
+
+        (async () => {
+
+            try {
+
+                const video = document.getElementById("video")
+
+                let stream = await navigator.mediaDevices.getUserMedia({
+                    audio: false,
+                    video: {
+                        facingMode: "environment",
+                    }
+                })
+
+                video.srcObject = stream
+
+                video.onloadedmetadata = async () => {
+                    mobilenet = ml5.featureExtractor('MobileNet', { //importa o modulo com epocas para treinar 
+                        epochs: 40,
+                        numLabels: 4,
+                    }, () => {
+                        console.log('Model is ready!')
+                        classifier.load('model.json', () => {
+                            console.log('custom model ready')
+                            classifier.classify(showResults)
+                        })
+                    })
+                    classifier = mobilenet.classification(video, () => console.log('Video is ready!'))
+                }
+
+            } catch (err) {
+                alert('Por favor de acesso a sua camera ' + err)
+            }
+
+        })()
+
+        function showResults(err, results) {
+            if (results[0].label == 'youtube' && (results[0].confidence * 100).toFixed(2) >= 98) window.open('https://www.youtube.com/watch?v=VQ2EyU75p2o');
+            document.getElementById('box').innerHTML = results[0].label + ' ' + (results[0].confidence * 100).toFixed(2)
+            classifier.classify(showResults)
+        }
+
+        function sortImage(label) {
+            classifier.addImage(label)
+        }
+
+
+        function saveModel() {
+            classifier.save();
+        }
+
+        function trainer() {
+            classifier.train(whileTraining)
+        }
+        function whileTraining(loss) {
+            if (loss == null) {
+                console.log('training complete');
+                classifier.classify(showResults)
+            } else {
+                console.log('erros ' + loss)
+            }
+        }
+
+    </script>
+    <style>
+    </style>
+
+</body>
+
+</html>
