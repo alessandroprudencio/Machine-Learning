@@ -1,7 +1,8 @@
-# Deteção de objetos com Tensorflow js
+# Deteção de objetos em tempo real com Tensorflow js
 
 Programando redes neurais com Tensorflow JS e ML5
 
+[![Detecção de objetos em tempo real](https://youtu.be/SRVkBJfS1Zc)
 
 ## Vamos começar!
 
