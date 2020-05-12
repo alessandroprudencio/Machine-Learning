@@ -1,6 +1,7 @@
-# Crud de usuários com GraphQL
+# Deteção de objetos com Tensorflow js
 
 Programando redes neurais com Tensorflow JS e ML5
+
 
 ## Vamos começar!
 
