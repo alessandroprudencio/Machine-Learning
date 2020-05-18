@@ -59,7 +59,7 @@ Nesta rota voce tera a capacidade de criar seu modelo e treina lo.
 
 Tera 3 botoes garrafas, perfume e foto celular, ao clicar em cada um desses opçoes sera "tirada" foto do video em tempo real, que automaticamente é salva em uma variavel no projeto. contudo para que o algoritmo indentifique que é uma garrafa precisamos mostrar isto a ele, então,por exemplo para treinar as fotos de garrafas devera fazer o seguinte, posicione a garrafa em frente a camera do seu dispositivo e clique no botão garrafas, cada clique é como se fosse um foto da tela ao vivo, ou seja tire fotos  da garrafa de varios angulos.Faça isso para os outros botões.Ao finalizar clique no botão treinar  e pronto seu algoritmo de ml estara pronto, para testar bastas colocar os objetos em frente a camera e ver o resultado logo abaixo...
 
-    Foi utilizado o Transfer Learning permitindo extrair recursos de uma imagem por meio de um modelo pré-treinado e treiná-lo novamente com novos dados.
+Foi utilizado o Transfer Learning permitindo extrair recursos de uma imagem por meio de um modelo pré-treinado e treiná-lo novamente com novos dados.
 
 
 ___
